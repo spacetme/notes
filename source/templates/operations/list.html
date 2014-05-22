@@ -1,0 +1,16 @@
+<div class="operations-list">
+  <div ng-class="{
+    operation: true,
+    failed: item.status == 'failed',
+    succeeded: item.status == 'succeeded',
+    running: item.status == 'running'
+  }" ng-repeat="item in operations.items">
+    <span class="op-spinner" ng-show="item.status == 'running'"><i class="fa fa-spinner fa-spin"></i></span>
+    <span class="op-button-right" ng-show="item.status == 'failed'" ng-click="item.retry()" title="Retry"><i class="fa fa-repeat fa-fw"></i></span>
+    <span class="op-button-right" ng-show="item.status == 'failed'" ng-click="item.letItGo()" title="Cancel"><i class="fa fa-times fa-fw"></i></span>
+    {{item.task.name}}
+    <div class="failed-info" ng-if="item.status == 'failed'">
+      <strong>Failed:</strong> {{item.reason}}
+    </div>
+  </div>
+</div>

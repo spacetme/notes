@@ -1,0 +1,52 @@
+
+<div class="signed-in" ng-if="dropbox.authenticated">
+
+  <div class="folder-listing" ng-if="state.name == 'folder-listing'" ng-controller="FolderListingController">
+    <div class="folders-columns"><ul class="column" ng-repeat="column in columns">
+      <li ng-repeat="item in column.items" ng-class="{
+        folder: item.type == 'folder',
+        file: item.type == 'file',
+        local: item.local,
+        changed: item.changed,
+        selected: item == column.selectedItem
+      }"><a href="javascript://notes/" ng-click="click(item, column)"><i class="icon"></i> {{item.name}} <span ng-show="item.changed" class="changed-marker">[+]</span></a></li>
+      <li class="operations" sp-operations-list="column.operations"></li>
+      <li class="separator"></li>
+      <li class="new-file" notes-link-form><a href="javascript://new-file/"><i class="icon"></i> New File</a>
+        <form ng-submit="newFile(newFileName, column)">
+          <p><i class="icon"></i>&nbsp;<span class="input"><input ng-model="newFileName" placeholder="File Name..." type="text"></span></p>
+        </form>
+      </li>
+      <li class="new-folder" notes-link-form><a href="javascript://new-folder/"><i class="icon"></i> New Folder</a>
+        <form ng-submit="newFolder(newFolderName, column)">
+          <p><i class="icon"></i>&nbsp;<span class="input"><input ng-model="newFolderName" placeholder="Folder Name..." type="text"></span></p>
+        </form>
+      </li>
+    </ul></div>
+  </div>
+
+  <div ng-if="state.name == 'file-view'">
+    <div class="file-view" ng-repeat="file in state.files">
+      
+      <div class="toolbar">
+        <div class="back-button" ng-click="closeFile()">
+          <i class="fa fa-chevron-left"></i>
+        </div>
+        <div class="save-button" ng-click="file.save()">
+          <i class="fa fa-save"></i>
+        </div>
+        <div class="discard-button" ng-click="discardFile(file)">
+          <i class="fa fa-times"></i>
+        </div>
+        <div class="title">
+          <i class="icon fa fa-file-text"></i><span class="file-name">{{file.path}}<span ng-show="file.changed" class="changed-marker"> [+]</span> <code>{{file.tag()}}</code></span>
+        </div>
+      </div>
+
+      <div class="text-editor" notes-codemirror="file.contents"></div>
+      <div class="editor-operations-list" sp-operations-list="file.operations"></div>
+      
+    </div>
+  </div>
+
+</div>

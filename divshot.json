@@ -1,0 +1,7 @@
+{
+  "name": "notes",
+  "root": "./build/",
+  "clean_urls": false,
+  "cache_control": {},
+  "routes": {}
+}

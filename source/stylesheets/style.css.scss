@@ -1,0 +1,395 @@
+
+$fa-font-path: "/fonts";
+
+@import "bootstrap";
+@import "../../vendor/font-awesome-4.1.0/scss/font-awesome";
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400);
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&subset=latin,latin-ext);
+
+$bg0: #090807;
+$bg1: #353433;
+$fg1: #e9e8e7;
+
+body {
+  background: $bg0;
+  color: $fg1;
+  margin: 0;
+  padding: 0;
+  font: normal 16px Open Sans, sans-serif;
+}
+
+#notes-app {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+  left: 10px;
+}
+
+.changed-marker {
+  color: #ff5;
+}
+
+
+
+
+// (global)
+
+h1 {
+  font: normal 36px Open Sans, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+p.tagline {
+  font: normal 16px Open Sans, sans-serif;
+  margin: 0.5ex 0 1em;
+  padding: 0;
+  color: #a1a6aa;
+}
+
+
+
+// operations list
+
+.operations-list {
+  .operation {
+
+    background: #353433;
+    margin: 10px;
+    padding: 4px 6px;
+    text-align: left;
+    font-size: 11px;
+    color: #8b8685;
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 1px rgba(white, 0.1);
+
+    &.failed {
+      background: #453433;
+      color: #ab8685;
+    }
+    &.running {
+      background: #354453;
+      color: #8b96a5;
+    }
+
+    .failed-info {
+      font-size: 10px;
+    }
+
+    .op-button-right {
+      float: right;
+      cursor: pointer;
+      &:hover {
+        color: white;
+      }
+    }
+
+    .op-spinner {
+      float: right;
+      color: #cbc6c5;
+    }
+
+  }
+}
+
+
+
+// (home page)
+
+.home-page {
+  margin: 0 12px;
+}
+
+.big-box {
+  text-align: center;
+  background: $bg1;
+  border-radius: 12px;
+  margin: 15px 0;
+  padding: 24px;
+  h2 {
+    font: 30px Montserrat;
+    margin: 0 0 0.6em;
+  }
+}
+
+
+// (loading box)
+
+.loading {
+  @extend .big-box;
+}
+
+// (not signed in box)
+
+.not-signed-in {
+  @extend .big-box;
+  .sign-in-button {
+    margin-top: 1.3em;
+  }
+}
+
+
+
+// file list
+
+.file-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li {
+    line-height: 1.4;
+    a {
+      display: block;
+      color: $fg1;
+      padding: 5px 7px;
+      text-decoration: none;
+      &:hover {
+        background: $bg1;
+      }
+      &:focus {
+        background: #25a;
+      }
+    }
+    &.selected a {
+      background: #36b;
+    }
+    form {
+      margin: 0;
+      padding: 5px 7px;
+      position: relative;
+      p {
+        margin: 0;
+      }
+      .input {
+        display: block;
+        position: absolute;
+        top: 5px;
+        left: 32px;
+        right: 0;
+        bottom: 0;
+      }
+      input {
+        border: 0;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        background: transparent;
+      }
+    }
+    i.icon {
+      @extend .fa;
+      @extend .fa-fw;
+    }
+    &.local {
+      opacity: 0.5;
+    }
+    &.folder i.icon {
+      @extend .fa-folder;
+    }
+    &.file i.icon {
+      @extend .fa-file-text;
+    }
+    &.new-folder i.icon {
+      @extend .fa-folder-o;
+    }
+    &.new-file i.icon {
+      @extend .fa-file-text-o;
+    }
+    &.separator {
+      height: 1px;
+      background: #454443;
+    }
+  }
+}
+
+.folders-columns {
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  display: -webkit-flex;
+  -webkit-align-items: stretch;
+
+  display: flex;
+  align-items: stretch;
+
+  border: 1px solid #454443;
+  margin-bottom: 12px;
+  white-space: nowrap;
+
+  .column {
+    @extend .file-list;
+    min-width: 15em;
+    vertical-align: top;
+    border-right: 1px solid #454443;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+  }
+
+}
+
+
+
+
+// (file view)
+
+.file-view {
+
+  &.prototype {
+    position: relative;
+    height: 500px;
+  }
+
+  & {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 1px solid #454443;
+  }
+
+  .toolbar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 34px;
+    background: #353433;
+    background: #353433 linear-gradient(to bottom, #353433, #252423);
+    border-bottom: 1px solid #353433;
+    .back-button {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 32px;
+      border-right: 1px solid #353433;
+      text-align: center;
+      line-height: 32px;
+      cursor: pointer;
+    }
+    .discard-button, .save-button {
+      float: right;
+      width: 32px;
+      height: 32px;
+      border-left: 1px solid #353433;
+      text-align: center;
+      line-height: 32px;
+      cursor: pointer;
+    }
+    .title {
+      line-height: 30px;
+      padding-left: 1.2ex;
+      margin-left: 32px;
+      .icon {
+        margin-right: 1ex;
+      }
+      code {
+        background: #454443;
+        color: #8b8685;
+      }
+    }
+  }
+
+  .text-editor {
+    position: absolute;
+    top: 34px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+
+  .editor-operations-list {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    width: 180px;
+    word-wrap: break-word;
+  }
+
+}
+
+
+
+
+// (text editor)
+
+.CodeMirror {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  height: 100%;
+}
+
+.CodeMirror.cm-s-spacetme {
+
+  & {
+    background: $bg0;
+    color: $fg1;
+    font: 18px/1.4 Source Code Pro;
+  }
+
+  .CodeMirror-gutters {
+    background: #252423;
+    color: #555453;
+    border-color: #454443;
+    padding-left: 1em;
+    padding-right: 0.5ex;
+  }
+
+  .CodeMirror-selected {
+    background: #8b8685;
+    box-shadow: 0 0 5px #8b8685;
+    border-radius: 3px;
+  }
+
+  .CodeMirror-cursor {
+    border-left: 1px solid #e9e8e7;
+    box-shadow: 0 0 5px 1px #8b8685;
+  }
+
+  $green-keyword: #B9DCA0;
+  $green-comment: #8FDC9F;
+  $yellow: #DEDBA0;
+  $red: #FF9B9A;
+  $blue: #96BEDC;
+  $gray: #8b8685;
+  $light-gray: mix($gray, $fg1, 50%);
+
+  .cm-keyword, .cm-operator {
+    color: $yellow;
+  }
+  .cm-number, .cm-string {
+    color: $red;
+  }
+  .cm-comment {
+    color: $green-comment;
+  }
+  .cm-link {
+    color: $blue;
+  }
+
+  .cm-header {
+    color: $gray;
+  }
+  .cm-header-1 {
+    color: $yellow;
+  }
+  .cm-header-2 {
+    color: $green-keyword;
+  }
+  .cm-header-3 {
+    color: $blue;
+  }
+  .cm-header-4 {
+    color: $red;
+  }
+
+  .cm-quote {
+    color: $light-gray;
+  }
+
+}
+

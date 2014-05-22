@@ -1,0 +1,35 @@
+
+<div id="notes-app" ng-app="notes" ng-controller="MainController">
+
+  <div class="home-page">
+
+    <h1>notes.spacet.me<small ng-if="host != 'notes.spacet.me'" ng-bind="' @ ' + host"></small></h1>
+
+    <p class="tagline">A simple notes application for Dropbox. Write in Markdown (plain text).</p>
+
+    <div class="loading" ng-show="!appLoaded">
+      <h2>Loading...</h2>
+      <p>Please hold on while the application loads!</p>
+      <p class="text-muted">JavaScript is required, by the way...</p>
+    </div>
+
+    <ng-include src="'templates/not-signed-in.html'"></ng-include>
+    <ng-include src="'templates/signed-in.html'"></ng-include>
+
+  </div>
+
+  <% File.join(root, 'source').tap do |source| %>
+    <% Dir[File.join(source, 'templates', '**', '*.html')].each do |filename| %>
+      <% id = Pathname.new(filename).relative_path_from(Pathname.new(source)) %>
+      <script type="text/ng-template" id="<%= id %>"><%= File.read(filename) %></script>
+    <% end %>
+  <% end %>
+
+</div>
+
+<script src="https://www.dropbox.com/static/api/dropbox-datastores-1.0-latest.js" type="text/javascript"></script>
+<%= javascript_include_tag "vendor/codemirror" %>
+<%= javascript_include_tag "vendor/angular" %>
+<%= javascript_include_tag "vendor/google_diff_match_patch" %>
+<%= javascript_include_tag "notes" %>
+
