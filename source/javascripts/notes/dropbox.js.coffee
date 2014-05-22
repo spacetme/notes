@@ -3,8 +3,17 @@ angular.module('notesDropbox', [])
 
 .factory 'dropboxClient', (DROPBOX_APP_KEY) ->
 
-  new Dropbox.Client(key: DROPBOX_APP_KEY)
-
+  if Dropbox?
+    new Dropbox.Client(key: DROPBOX_APP_KEY)
+  else
+    console.log "Dropbox not found... Probably offline!"
+    offline = -> new Error("Dropbox is offline!")
+    authenticate: ->
+    isAuthenticated: -> true
+    readdir: (path, options, callback) -> callback(offline())
+    mkdir: (path, callback) -> callback(offline())
+    readFile: (path, options, callback) -> callback(offline())
+    writeFile: (path, contents, options, callback) -> callback(offline())
 
 .factory 'dropbox', (dropboxClient, $q) ->
 

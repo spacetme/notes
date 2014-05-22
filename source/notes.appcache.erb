@@ -1,0 +1,36 @@
+---
+layout: false
+---
+CACHE MANIFEST
+# version 3
+<%= %W(
+
+  index.html
+
+  #{url_for 'fonts/fontawesome-webfont.eot'}
+  #{url_for 'fonts/fontawesome-webfont.svg'}
+  #{url_for 'fonts/fontawesome-webfont.ttf'}
+  #{url_for 'fonts/fontawesome-webfont.woff'}
+  #{url_for 'fonts/FontAwesome.otf'}
+  
+  #{url_for 'stylesheets/vendor/codemirror.css'}
+  #{url_for 'stylesheets/style.css'}
+
+  https://www.dropbox.com/static/api/dropbox-datastores-1.0-latest.js
+  #{url_for 'javascripts/vendor/codemirror.js'}
+  #{url_for 'javascripts/vendor/angular.js'}
+  #{url_for 'javascripts/vendor/google_diff_match_patch.js'}
+  #{url_for 'javascripts/notes.js'}
+  
+  https://fonts.googleapis.com/css?family=Open+Sans:400
+    https://themes.googleusercontent.com/static/fonts/opensans/v8/cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf
+  https://fonts.googleapis.com/css?family=Montserrat
+    https://themes.googleusercontent.com/static/fonts/montserrat/v4/zhcz-_WihjSQC0oHJ9TCYC3USBnSvpkopQaUR-2r7iU.ttf
+  https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&subset=latin,latin-ext
+    https://themes.googleusercontent.com/static/fonts/sourcecodepro/v4/mrl8jkM18OlOQN8JLgasD1zCdIATDt8zXO3QNtzVeJ8.ttf
+    https://themes.googleusercontent.com/static/fonts/sourcecodepro/v4/leqv3v-yTsJNC7nFznSMqWAlZ1PukdtTN2z-JxSzbe8.ttf
+
+).join("\n") %>
+
+NETWORK:
+*
