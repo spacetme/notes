@@ -314,7 +314,6 @@ p.tagline {
 
 
 
-
 // (text editor)
 
 .CodeMirror {
@@ -392,4 +391,34 @@ p.tagline {
   }
 
 }
+
+
+@mixin mobile-file-view {
+  .file-view {
+    bottom: auto;
+    height: auto;
+    .toolbar {
+      position: relative;
+    }
+    .text-editor {
+      height: auto;
+      top: 0;
+      bottom: auto;
+      position: relative;
+    }
+  }
+  .CodeMirror {
+    height: auto;
+    bottom: auto;
+    position: relative;
+  }
+}
+
+.mobile-safari {
+  @include mobile-file-view;
+}
+@media (max-height: 480px) {
+  @include mobile-file-view;
+}
+
 

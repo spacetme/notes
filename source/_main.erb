@@ -3,9 +3,13 @@
 
   <div class="home-page">
 
-    <h1>notes.spacet.me<small ng-if="host != 'notes.spacet.me'" ng-bind="' @ ' + host"></small></h1>
+    <div ng-show="state.name != 'file-view'">
 
-    <p class="tagline">A simple notes application for Dropbox. Write in Markdown (plain text).</p>
+      <h1>notes.spacet.me<small ng-if="host != 'notes.spacet.me'" ng-bind="' @ ' + host"></small></h1>
+
+      <p class="tagline">A simple notes application for Dropbox. Write in Markdown (plain text).</p>
+
+    </div>
 
     <div class="loading" ng-show="!appLoaded">
       <h2>Loading...</h2>

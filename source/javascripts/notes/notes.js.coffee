@@ -12,8 +12,10 @@ angular.module('notes', ['ngTouch', 'notesDropbox'])
 
 .config ($provide) ->
 
+  if (navigator.userAgent + '').match(/Mobile(\/\S+)?\s+Safari/)
+    angular.element(document.body).addClass 'mobile-safari'
+
   # http://stackoverflow.com/questions/18611214/turn-off-url-manipulation-in-angularjs
- 
   $provide.decorator '$browser', ($delegate) ->
     $delegate.onUrlChange = ->
     $delegate.url = -> ""
